@@ -1,0 +1,578 @@
+/* TodoList.css - Enhanced TodoList Component Styling */
+.todo-app {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-3xl);
+  box-shadow: var(--shadow-2xl);
+  overflow: hidden;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .todo-app {
+  background: rgba(17, 24, 39, 0.95);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  box-shadow: 
+    var(--shadow-2xl),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Enhanced header with theme toggle */
+.todo-header {
+  background: linear-gradient(135deg, var(--primary-600) 0%, var(--secondary-600) 100%);
+  color: var(--text-inverse);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.todo-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: headerShine 3s ease-in-out infinite;
+}
+
+@keyframes headerShine {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+.todo-header h1 {
+  margin: 0;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.todo-stats {
+  margin: var(--space-3) 0 0 0;
+  opacity: 0.9;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  position: relative;
+  z-index: 1;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  position: relative;
+  z-index: 2;
+  color: var(--text-inverse);
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle:active {
+  transform: translateY(0) scale(1);
+}
+
+/* Enhanced controls section */
+.todo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-light);
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color var(--transition-base);
+}
+
+[data-theme="dark"] .todo-controls {
+  background: var(--bg-tertiary);
+  border-bottom-color: var(--border-medium);
+}
+
+/* Modern button styles */
+.toggle-all-btn {
+  background: linear-gradient(135deg, var(--success-500) 0%, var(--success-600) 100%);
+  color: var(--text-inverse);
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-xl);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.toggle-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  filter: brightness(1.1);
+}
+
+.toggle-all-btn:active {
+  transform: translateY(0);
+}
+
+/* Enhanced filter buttons */
+.filter-buttons {
+  display: flex;
+  gap: var(--space-1);
+  background: var(--bg-primary);
+  padding: var(--space-1);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .filter-buttons {
+  background: var(--bg-secondary);
+  border-color: var(--border-medium);
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.filter-btn .count {
+  background: var(--primary-100);
+  color: var(--primary-700);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-full);
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+[data-theme="dark"] .filter-btn .count {
+  background: var(--primary-900);
+  color: var(--primary-300);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-500) 100%);
+  color: var(--text-inverse);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.filter-btn.active .count {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-inverse);
+}
+
+.filter-btn:hover:not(.active) {
+  background: var(--primary-100);
+  color: var(--primary-700);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .filter-btn:hover:not(.active) {
+  background: var(--primary-900);
+  color: var(--primary-300);
+}
+
+/* Clear completed button */
+.clear-completed-btn {
+  background: linear-gradient(135deg, var(--danger-500) 0%, var(--danger-600) 100%);
+  color: var(--text-inverse);
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-xl);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.clear-completed-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  filter: brightness(1.1);
+}
+
+/* Enhanced todo list with better scrolling */
+.todo-list {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 0;
+  position: relative;
+}
+
+.todo-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-list::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-base);
+}
+
+.todo-list::-webkit-scrollbar-thumb:hover {
+  background: var(--border-dark);
+}
+
+/* Enhanced empty state */
+.empty-state {
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  color: var(--text-tertiary);
+  background: var(--bg-primary);
+  transition: background-color var(--transition-base);
+}
+
+[data-theme="dark"] .empty-state {
+  background: var(--bg-secondary);
+}
+
+.empty-state .empty-icon {
+  font-size: var(--font-size-5xl);
+  margin-bottom: var(--space-4);
+  filter: grayscale(0.3) opacity(0.8);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.empty-state p {
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-secondary);
+}
+
+.empty-state small {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-normal);
+}
+
+/* Enhanced footer */
+.todo-footer {
+  background: var(--bg-secondary);
+  padding: var(--space-6);
+  text-align: center;
+  border-top: 1px solid var(--border-light);
+  transition: background-color var(--transition-base);
+}
+
+[data-theme="dark"] .todo-footer {
+  background: var(--bg-tertiary);
+  border-top-color: var(--border-medium);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.completion-message,
+.progress-message {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-direction: column;
+}
+
+.celebration,
+.progress-icon {
+  font-size: var(--font-size-2xl);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.completion-message p,
+.progress-message p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+}
+
+.completion-message small,
+.progress-message small {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .theme-toggle {
+  background: var(--bg-secondary);
+  border-color: var(--border-medium);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+/* Responsive design enhancements */
+@media (max-width: 768px) {
+  .todo-app {
+    margin: var(--space-4) 0;
+    border-radius: var(--radius-2xl);
+  }
+  
+  .todo-header {
+    padding: var(--space-6) var(--space-4);
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  
+  .header-content {
+    order: 2;
+  }
+  
+  .theme-toggle {
+    order: 1;
+    align-self: flex-end;
+  }
+  
+  .todo-header h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .todo-controls {
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: stretch;
+    padding: var(--space-4);
+  }
+  
+  .filter-buttons {
+    justify-content: center;
+    order: 1;
+  }
+  
+  .toggle-all-btn,
+  .clear-completed-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .toggle-all-btn {
+    order: 2;
+  }
+  
+  .clear-completed-btn {
+    order: 3;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .completion-message,
+  .progress-message {
+    flex-direction: row;
+    gap: var(--space-2);
+  }
+  
+  .empty-state {
+    padding: var(--space-8) var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-app {
+    margin: var(--space-2) 0;
+    border-radius: var(--radius-xl);
+  }
+  
+  .todo-header {
+    padding: var(--space-4) var(--space-3);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .header-content {
+    flex: 1;
+    order: 1;
+  }
+  
+  .theme-toggle {
+    order: 2;
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-lg);
+  }
+  
+  .todo-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .todo-controls {
+    padding: var(--space-3);
+  }
+  
+  .filter-btn {
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--font-size-xs);
+  }
+  
+  .filter-btn .count {
+    min-width: 16px;
+    height: 16px;
+    font-size: 10px;
+    padding: 2px var(--space-1);
+  }
+  
+  .empty-state {
+    padding: var(--space-6) var(--space-3);
+  }
+  
+  .empty-state .empty-icon {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+/* Loading animation for dynamic content */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.todo-app.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .todo-app,
+  .todo-header::before,
+  .filter-btn,
+  .toggle-all-btn,
+  .clear-completed-btn,
+  .theme-toggle {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .todo-app {
+    transform: none !important;
+  }
+}

@@ -1,0 +1,370 @@
+/* AddTodo.css - Enhanced AddTodo Component Styling */
+.add-todo {
+  padding: var(--space-6);
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color var(--transition-base);
+  position: relative;
+}
+
+[data-theme="dark"] .add-todo {
+  background: var(--bg-secondary);
+  border-bottom-color: var(--border-medium);
+}
+
+.add-todo-form {
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  position: relative;
+}
+
+/* Enhanced input with modern styling */
+.add-todo-input {
+  flex: 1;
+  padding: var(--space-4) var(--space-5);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-base);
+  background: var(--bg-primary);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  color: var(--text-primary);
+  position: relative;
+}
+
+[data-theme="dark"] .add-todo-input {
+  background: var(--bg-tertiary);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.add-todo-input:focus {
+  border-color: var(--primary-500);
+  box-shadow: 
+    0 0 0 4px rgba(59, 130, 246, 0.1),
+    var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .add-todo-input:focus {
+  border-color: var(--primary-400);
+  box-shadow: 
+    0 0 0 4px rgba(96, 165, 250, 0.2),
+    var(--shadow-lg);
+}
+
+.add-todo-input:disabled {
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  border-color: var(--border-light);
+  transform: none;
+}
+
+.add-todo-input::placeholder {
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-normal);
+  transition: color var(--transition-base);
+}
+
+.add-todo-input:focus::placeholder {
+  color: var(--primary-400);
+}
+
+/* Enhanced submit button with gradient and animations */
+.add-todo-btn {
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-500) 100%);
+  color: var(--text-inverse);
+  border: none;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: var(--font-size-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  height: 64px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  font-weight: var(--font-weight-semibold);
+}
+
+.add-todo-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left var(--transition-slow);
+}
+
+.add-todo-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-xl);
+  filter: brightness(1.1);
+}
+
+.add-todo-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.add-todo-btn:active:not(:disabled) {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.1s ease;
+}
+
+.add-todo-btn:disabled {
+  background: linear-gradient(135deg, var(--gray-400) 0%, var(--gray-500) 100%);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-sm);
+  filter: none;
+}
+
+.add-todo-btn:disabled::before {
+  display: none;
+}
+
+/* Enhanced input footer with better spacing */
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-3);
+  min-height: 24px;
+  gap: var(--space-4);
+}
+
+.char-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-base);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .char-count {
+  background: var(--bg-tertiary);
+}
+
+.input-hint {
+  font-size: var(--font-size-xs);
+  color: var(--primary-600);
+  font-weight: var(--font-weight-medium);
+  opacity: 0.8;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--primary-50);
+  animation: fadeInScale 0.3s ease-out;
+}
+
+[data-theme="dark"] .input-hint {
+  color: var(--primary-400);
+  background: var(--primary-900);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+/* Character count color states */
+.add-todo-input:focus ~ .input-footer .char-count {
+  color: var(--primary-600);
+  background: var(--primary-50);
+}
+
+[data-theme="dark"] .add-todo-input:focus ~ .input-footer .char-count {
+  color: var(--primary-400);
+  background: var(--primary-900);
+}
+
+/* Warning state for character limit */
+.char-count.warning {
+  color: var(--warning-700);
+  background: var(--warning-50);
+}
+
+[data-theme="dark"] .char-count.warning {
+  color: var(--warning-400);
+  background: var(--warning-900);
+}
+
+.char-count.danger {
+  color: var(--danger-700);
+  background: var(--danger-50);
+}
+
+[data-theme="dark"] .char-count.danger {
+  color: var(--danger-400);
+  background: var(--danger-900);
+}
+
+/* Success state animation */
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: var(--shadow-md);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-xl);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.add-todo-btn.success:not(:disabled) {
+  animation: successPulse 0.6s ease-out;
+  background: linear-gradient(135deg, var(--success-500) 0%, var(--success-600) 100%);
+}
+
+/* Loading state with spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.add-todo-btn.loading {
+  pointer-events: none;
+}
+
+.add-todo-btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Input validation states */
+.add-todo-input.error {
+  border-color: var(--danger-500);
+  box-shadow: 
+    0 0 0 4px rgba(239, 68, 68, 0.1),
+    var(--shadow-md);
+}
+
+.add-todo-input.success {
+  border-color: var(--success-500);
+  box-shadow: 
+    0 0 0 4px rgba(34, 197, 94, 0.1),
+    var(--shadow-md);
+}
+
+/* Responsive design enhancements */
+@media (max-width: 768px) {
+  .add-todo {
+    padding: var(--space-4);
+  }
+  
+  .input-container {
+    gap: var(--space-2);
+  }
+  
+  .add-todo-input {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+  
+  .add-todo-btn {
+    padding: var(--space-3) var(--space-4);
+    min-width: 56px;
+    height: 56px;
+    font-size: var(--font-size-lg);
+  }
+  
+  .input-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+  
+  .char-count,
+  .input-hint {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .add-todo {
+    padding: var(--space-3);
+  }
+  
+  .add-todo-input {
+    padding: var(--space-2) var(--space-3);
+  }
+  
+  .add-todo-btn {
+    min-width: 48px;
+    height: 48px;
+    font-size: var(--font-size-base);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .add-todo-input {
+    border-width: 3px;
+  }
+  
+  .add-todo-btn {
+    border: 2px solid var(--text-primary);
+  }
+  
+  .add-todo-input:focus {
+    box-shadow: 
+      0 0 0 6px rgba(59, 130, 246, 0.3),
+      var(--shadow-lg);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .add-todo-input,
+  .add-todo-btn,
+  .input-hint,
+  .char-count {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .add-todo-btn:hover:not(:disabled) {
+    transform: none !important;
+  }
+  
+  .add-todo-input:focus {
+    transform: none !important;
+  }
+}
